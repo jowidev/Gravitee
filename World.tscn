@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends KinematicBody2D
+
+var gravity = 25
+var speed = Vector2(250,0) #0,0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func get_input():
+	if Input.is_action_pressed(\"down\"):
+		gravity = 25
+	if Input.is_action_pressed(\"up\"):
+		gravity = -gravity
+	
+func _physics_process(_delta):
+	get_input()
+	speed.y += gravity
+	speed = move_and_slide(speed)
+"
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 77.2334
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 517.5, 36 )
+
+[node name="World" type="Node2D"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 300 )
+script = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 520, 557 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 520, 29 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 3 )

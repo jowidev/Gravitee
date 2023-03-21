@@ -7,4 +7,4 @@ func _ready():
 func _on_Timer_timeout():
 	var mob = props.instance()
 	add_child(mob)
-	print("1")
+	print("mob spawned")
